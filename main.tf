@@ -90,3 +90,11 @@ resource "aws_ecs_service" "medusa_service" {
 }
 
 
+output "ecs_cluster_name" {
+  value = aws_ecs_cluster.medusa_cluster.name
+}
+
+output "ecs_service_arn" {
+  value = aws_ecs_service.medusa_service.arn
+}    
+
