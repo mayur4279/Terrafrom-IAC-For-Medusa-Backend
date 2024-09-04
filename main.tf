@@ -5,8 +5,8 @@ resource "aws_vpc" "medusa_vpc" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.medusa_vpc.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id                  = aws_vpc.medusa_vpc.id
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 }
 
@@ -66,9 +66,9 @@ resource "aws_ecs_task_definition" "medusa_task" {
   cpu                      = "256"
   memory                   = "512"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
-  container_definitions    = jsonencode([{
-    name  = "medusa-container"
-    image = "medusajs/medusa:latest"
+  container_definitions = jsonencode([{
+    name      = "medusa-container"
+    image     = "medusajs/medusa:latest"
     essential = true
     portMappings = [{
       containerPort = 80
@@ -84,7 +84,7 @@ resource "aws_ecs_service" "medusa_service" {
   desired_count   = 1
   launch_type     = "FARGATE"
   network_configuration {
-    subnets = [aws_subnet.public_subnet.id]
+    subnets         = [aws_subnet.public_subnet.id]
     security_groups = [aws_security_group.allow_all.id]
   }
 }
