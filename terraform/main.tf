@@ -31,6 +31,7 @@ resource "aws_security_group" "allow_all" {
 
 
 
+
 # Adding IAM Role 
 
 resource "aws_iam_role" "ecs_task_execution_role" {
